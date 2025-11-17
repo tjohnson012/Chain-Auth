@@ -1,0 +1,6 @@
+'use client'
+import{useEffect}from'react'
+import{useRouter}from'next/navigation'
+import{useWeb3Auth}from'@/lib/web3auth'
+import{Chrome,Wallet}from'lucide-react'
+export default function Home(){const r=useRouter();const{connect,isConnected,loading}=useWeb3Auth();useEffect(()=>{if(isConnected&&!loading)r.push('/dashboard')},[isConnected,loading]);if(loading)return<div className="min-h-screen flex items-center justify-center"><div className="animate-spin h-8 w-8 border-2 border-blue-500 rounded-full border-t-transparent"/></div>;return<div className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900"><header className="glass border-b"><div className="container mx-auto px-6 py-4 flex items-center space-x-2"><Wallet className="w-6 h-6 text-blue-500"/><span className="text-xl font-bold">ChainAuth</span></div></header><main className="container mx-auto px-6 pt-32 text-center"><h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent">Social Login→Web3</h1><p className="text-xl text-gray-400 mb-8">Google→Westend Wallet</p><button onClick={connect}className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-lg text-lg font-semibold"><Chrome className="w-5 h-5"/><span>Login</span></button></main></div>}
